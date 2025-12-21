@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 1-create_ssh_key_pair
 # Script to create an RSA key pair with a passphrase
 
