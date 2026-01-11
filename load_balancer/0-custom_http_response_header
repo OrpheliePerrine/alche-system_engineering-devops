@@ -1,0 +1,21 @@
+s Bash script installs nginx and configures a custom HTTP response header X-Served-By with the server hostname
+
+# Install Nginx
+apt-get update -y
+apt-get install -y nginx
+
+# Create the root page
+echo "Holberton School for the win!" > /var/www/html/index.html
+
+# Add the custom header to the default server block
+sed -i "s|server_name _;|server_name _;\n\tadd_header X-Served-By \$hostname;|g" /etc/nginx/sites-available/default
+
+# Test nginx config
+nginx -t
+
+# Start or reload nginx
+if pgrep nginx >/dev/null 2>&1; then
+    service nginx reload
+else
+    service nginx start
+fi
