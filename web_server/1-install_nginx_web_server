@@ -1,5 +1,5 @@
-
-ur Bash script installs and configures nginx to serve a custom page
+#!/usr/bin/env bash
+# This Bash script installs and configures nginx to serve a page containing Holberton School
 
 # Update package list and install nginx
 apt-get update -y
