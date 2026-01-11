@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Check if exactly 4 arguments are passed
+if [ "$#" -ne 4 ]; then
+    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+    exit 1
+fi
+
+# Assign arguments to variables
+PATH_TO_FILE="$1"
+IP="$2"
+USERNAME="$3"
+PATH_TO_SSH_KEY="$4"
+
+# Transfer the file using scp
+scp -i "$PATH_TO_SSH_KEY" \
+    -o StrictHostKeyChecking=no \
+    "$PATH_TO_FILE" \
+    "$USERNAME@$IP:~/"
