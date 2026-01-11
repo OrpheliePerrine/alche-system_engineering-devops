@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 # This Bash script installs and configures nginx to serve a page containing Holberton School
 
-# Update package list and install nginx
 apt-get update -y
 apt-get install -y nginx
 
-# Create a simple index page with required content
 echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Restart nginx without using systemctl
-service nginx restart
+service nginx start
