@@ -5,16 +5,19 @@
 apt-get update -y
 apt-get install -y nginx
 
-# Create the root page
+# Create root page
 echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Add the custom header to the default server block
-sed -i "s|server_name _;|server_name _;\n\tadd_header X-Served-By \$hostname;|g" /etc/nginx/sites-available/default
+# Get the hostname of the server
+HOSTNAME=$(hostname)
 
-# Test nginx config
+# Add custom header with literal hostname
+sed -i "s|server_name _;|server_name _;\n\tadd_header X-Served-By $HOSTNAME;|g" /etc/nginx/sites-available/default
+
+# Test Nginx configuration
 nginx -t
 
-# Start or reload nginx
+# Start or reload Nginx
 if pgrep nginx >/dev/null 2>&1; then
     service nginx reload
 else
