@@ -6,7 +6,6 @@ apt-get install -y nginx
 
 echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Replace a single line with multiple lines using sed to add the redirect
-sed -i 's|try_files $uri $uri/ =404;|try_files $uri $uri/ =404;\n\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}|g' /etc/nginx/sites-available/default
+sed -i "s|try_files \$uri \$uri/ =404;|try_files \$uri \$uri/ =404;\n\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}|g" /etc/nginx/sites-available/default
 
 service nginx restart
