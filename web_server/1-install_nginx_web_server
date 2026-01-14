@@ -1,15 +1,15 @@
-#!/bin/bash
-# 1-install_nginx_web_server
+#!/usr/bin/env bash
+# This script installs Nginx on a Ubuntu server and configures the root page
 
 # Update package lists
 apt-get update -y
 
-# Install nginx
+# Install Nginx
 apt-get install -y nginx
 
-# Ensure Nginx is listening on port 80 (default)
-# We'll overwrite the default index.html to meet requirements
+# Write the required content to the root page
 echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Restart nginx using service (not systemctl)
+# Restart Nginx using service
 service nginx restart
+
