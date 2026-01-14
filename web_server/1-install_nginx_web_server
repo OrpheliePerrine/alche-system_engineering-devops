@@ -1,4 +1,5 @@
-nstall_nginx_web_server
+#!/bin/bash
+# 1-install_nginx_web_server
 
 # Update package lists
 apt-get update -y
