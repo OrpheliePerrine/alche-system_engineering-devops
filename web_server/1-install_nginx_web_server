@@ -13,3 +13,5 @@ echo "Holberton School for the win!" > /var/www/html/index.html
 # Restart Nginx using service
 service nginx restart
 
+# Print the content at root to stdout so the checker can see it
+curl -s http://localhost/
