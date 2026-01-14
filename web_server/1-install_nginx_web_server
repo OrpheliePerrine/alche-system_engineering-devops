@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # This script installs Nginx on a Ubuntu server and configures the root page
 
-# Update package lists
+# Update package index
 apt-get update -y
 
-# Install Nginx
+# Install Nginx if not already installed
 apt-get install -y nginx
 
 # Write the required content to the root page
 echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Restart Nginx using service
-service nginx restart
+# Ensure Nginx is started and running
+service nginx start
 
-# Print the content at root to stdout so the checker can see it
-curl -s http://localhost/
+# Restart Nginx to apply the new index page
+service nginx restart
