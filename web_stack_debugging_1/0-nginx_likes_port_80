@@ -2,4 +2,6 @@
 # This script installs and starts Nginx so it returns HTTP 200 on port 80
 apt-get update
 apt-get install -y nginx
-nginx -g 'daemon off;'
+# Ensure Nginx is started and runs in the foreground
+service nginx start
+curl -s -o /dev/null -w "%{http_code}" 0:80
