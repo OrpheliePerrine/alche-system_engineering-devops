@@ -21,7 +21,7 @@ file { '/var/www/html':
 
 # Make sure Apache is running and enabled
 service { 'apache2':
-  ensure => running,
-  enable => true,
+  ensure  => running,
+  enable  => true,
   require => File['/var/www/html'],
 }
