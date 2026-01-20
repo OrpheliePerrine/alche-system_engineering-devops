@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # This script installs and starts Nginx so it returns HTTP 200 on port 80
 
-# Update packages and install Nginx
+# Update package list
 apt-get update
+
+# Install Nginx
 apt-get install -y nginx
 
-# Fix missing directories (common in bare containers)
-mkdir -p /var/run/nginx
+# Ensure necessary directories exist
+mkdir -p /var/run /var/run/nginx /var/log/nginx
 
-# Start Nginx in the background
-service nginx start
+# Start Nginx as a daemon
+nginx
