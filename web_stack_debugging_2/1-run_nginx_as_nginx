@@ -1,28 +1,22 @@
 #!/usr/bin/env bash
 # Configures Nginx to run as nginx user on port 8080
 
-# Install Nginx if missing
+# Update packages and install Nginx if missing
 apt-get update
 apt-get install -y nginx
 
 # Ensure nginx user exists
-id -u nginx &>/dev/null || useradd -r -s /usr/sbin/nologin nginx
+id -u nginx &>/dev/null || useradd -r -s /sbin/nologin nginx
 
-# Backup nginx.conf
+# Backup default nginx.conf
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 
-# Set master and worker processes to nginx
-sed -`i 's/^user .*;/user nginx;/' /etc/nginx/nginx.conf
+# Configure Nginx: run as nginx user and listen on port 8080
+sed -i 's/^user .*;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
 
-# Set default site to listen on port 8080
-sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 default_server;/listen [::]:8080 default_server;/' /etc/nginx/sites-available/default
+# Ensure required directories exist
+mkdir -p /var/run/nginx /var/log/nginx
 
-# Create missing directories (common in containers)
-mkdir -p /var/run/nginx /var/log/nginx /var/cache/nginx
-
-# Ensure old PID is removed
-rm -f /var/run/nginx.pid
-
-# Start Nginx in foreground (works in container)
+# Start Nginx
 nginx
