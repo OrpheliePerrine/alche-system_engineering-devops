@@ -1,0 +1,21 @@
+s script configures Nginx to run as nginx user and listen on port 8080
+
+# Update package list and install Nginx if missing
+apt-get update
+apt-get install -y nginx
+
+# Ensure nginx user exists
+id -u nginx &>/dev/null || useradd -r -s /sbin/nologin nginx
+
+# Backup default nginx.conf just in case
+cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+
+# Update Nginx config: run as nginx user and listen on port 8080
+sed -i 's/^user .*;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
+
+# Fix missing directories in minimal containers
+mkdir -p /var/run/nginx /var/log/nginx
+
+# Start Nginx
+nginx
