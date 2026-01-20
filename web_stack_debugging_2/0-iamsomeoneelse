@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script runs 'whoami' as the user passed as the first argument
+
+# $1 is the username passed to the script
+su - "$1" -c "whoami"
