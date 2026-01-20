@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script installs and starts Nginx so it listens on port 80`
 apt-get update
 apt-get install -y nginx
 service nginx start
